@@ -11,9 +11,14 @@ class Favorites with ChangeNotifier {
 
   List<String> get favorites => _favorites;
 
-  Favorites() {
+  init() async {
+    await storage.ready;
     _favorites = (storage.getItem('favorites') ?? []).cast<String>().toList();
     _s.addAll(_favorites);
+  }
+
+  Favorites() {
+    init();
   }
   _saveToStorage() {
     storage.setItem('favorites', _favorites);
