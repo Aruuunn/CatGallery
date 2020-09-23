@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 class CatPhotos with ChangeNotifier {
   List<String> images = [];
 
+  bool isLoading = true;
 
   Future<void> load() async {
     final res = await http.get(
@@ -15,6 +16,7 @@ class CatPhotos with ChangeNotifier {
     final data = jsonDecode(res.body) as List;
 
     this.images.addAll(data.map((e) => e["url"] as String).toList());
+    isLoading = false;
     notifyListeners();
   }
 

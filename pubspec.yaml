@@ -11,6 +11,10 @@ environment:
 dependencies:
   cached_network_image: ^2.3.2+1
 
+  localstorage: ^3.0.0
+
+  shimmer: ^1.1.1
+  
   flutter_dotenv: ^2.1.0
   
   provider: ^4.3.2+2
@@ -24,6 +28,8 @@ dependencies:
 
   cupertino_icons: ^0.1.3
 
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -33,11 +39,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/cat-1.jpg
-    - images/cat-2.jpg
-    - images/cat-3.jpg
-    - images/logo.svg
-
+    - images/
 
   fonts:
     - family: ArchitectsDaughter

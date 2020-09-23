@@ -14,18 +14,19 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final isLoading = Provider.of<CatPhotos>(context).isLoading;
     return Scaffold(
       appBar: CustomAppbar(
         title: "Cat Gallery",
       ),
-      body: Consumer<CatPhotos>(
+      body:!isLoading? Consumer<CatPhotos>(
         builder: (ctx, catphotos, child) => List(
           images: catphotos.images,
         ),
+      ):Center(
+        child: CircularProgressIndicator(),
       ),
-      endDrawer: Drawer(
-        child:const DrawerChild()
-      ),
+      endDrawer: Drawer(child: const DrawerChild()),
     );
   }
 }

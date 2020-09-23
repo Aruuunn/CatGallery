@@ -12,13 +12,16 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar(
         title: 'Favorites',
       ),
-      endDrawer: Drawer(child: const DrawerChild(),),
+      endDrawer: Drawer(
+        child: const DrawerChild(),
+      ),
       body: Consumer<Favorites>(
         builder: (ctx, fav, child) => List(
           images: fav.favorites,
