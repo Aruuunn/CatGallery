@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:share/share.dart';
 
 import '../../models/Favorites/Favorites.dart';
 
@@ -91,11 +92,20 @@ class _CustomCardState extends State<CustomCard> {
                         bottomRight: Radius.circular(10)),
                     child: Container(
                       width: double.maxFinite,
-                      height: 30,
-                      color: Color.fromRGBO(145, 109, 213, 0.5),
+                      height: 70,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              Color.fromRGBO(145, 109, 213, 0.6),
+                              Colors.transparent
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter),
+                      ),
                       child: Container(
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconButton(
                               padding: EdgeInsets.all(0),
@@ -108,7 +118,17 @@ class _CustomCardState extends State<CustomCard> {
                               onPressed: () {
                                 handleDoubelTap();
                               },
-                            )
+                            ),
+                            Builder(
+                                builder: (ctx) => IconButton(
+                                      icon: Icon(
+                                        Icons.share_rounded,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () async {
+                                        _onShare(ctx);
+                                      },
+                                    ))
                           ],
                         ),
                       ),
@@ -119,5 +139,20 @@ class _CustomCardState extends State<CustomCard> {
         ),
       ),
     );
+  }
+
+  _onShare(BuildContext context) async {
+    // A builder is used to retrieve the context immediately
+    // surrounding the RaisedButton.
+    //
+    // The context's `findRenderObject` returns the first
+    // RenderObject in its descendent tree when it's not
+    // a RenderObjectWidget. The RaisedButton's RenderObject
+    // has its position and size after it's built.
+    final RenderBox box = context.findRenderObject();
+
+    await Share.share(widget.url,
+        subject: 'Cat Photo',
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
 }

@@ -35,7 +35,7 @@ class Favorites with ChangeNotifier {
 
   void addToFavorites(String url) {
     if (!_s.contains(url)) {
-      _favorites.add(url);
+      _favorites.insert(0, url);
       _s.add(url);
       _saveToStorage();
       notifyListeners();

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -18,23 +17,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        child: ChangeNotifierProvider(
-          child: MaterialApp(
-              title: 'Cat Gallery',
-              theme: ThemeData(
-                primarySwatch: Colors.purple,
-                visualDensity: VisualDensity.adaptivePlatformDensity,
-                appBarTheme: AppBarTheme(color: Color.fromRGBO(62, 32, 109, 1)),
-                canvasColor: Color.fromRGBO(240, 227, 255, 1),
-              ),
-              initialRoute: '/',
-              home: Home(),
-              routes: {
-               '/favorite':(ctx) => FavoriteScreen()
-              },
-              ),
-          create: (ctx) => Favorites(),
+      child: ChangeNotifierProvider(
+        child: MaterialApp(
+          title: 'Cat Gallery',
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            appBarTheme: AppBarTheme(color: Color.fromRGBO(62, 32, 109, 1)),
+            canvasColor: Color.fromRGBO(240, 227, 255, 1),
+          ),
+          initialRoute: '/',
+          home: Home(),
+          routes: {'/favorite': (ctx) => FavoriteScreen()},
         ),
-        create: (ctx) => CatPhotos());
+        create: (ctx) => Favorites(),
+      ),
+      create: (ctx) => CatPhotos(),
+    );
   }
 }
